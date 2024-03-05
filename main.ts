@@ -100,7 +100,9 @@ class RecentFilesListView extends ItemView {
     const rootEl = createDiv({ cls: 'nav-folder mod-root' });
     const childrenEl = rootEl.createDiv({ cls: 'nav-folder-children' });
 
-    this.data.recentFiles.forEach((currentFile) => {
+    // this.data.recentFiles.forEach((currentFile) => {});
+    for (let i = 0; i < this.data.recentFiles.length; i++) {
+      const currentFile = this.data.recentFiles[i];
       const navFile = childrenEl.createDiv({
         cls: 'tree-item nav-file recent-files-file',
       });
@@ -111,7 +113,7 @@ class RecentFilesListView extends ItemView {
         cls: 'tree-item-inner nav-file-title-content recent-files-title-content',
       });
 
-      navFileTitleContent.setText(currentFile.basename);
+      navFileTitleContent.setText(`${i}ㅤㅤ${currentFile.basename}`);
 
       if (openFile && currentFile.path === openFile.path) {
         navFileTitle.addClass('is-active');
@@ -164,7 +166,7 @@ class RecentFilesListView extends ItemView {
         await this.removeFile(currentFile);
         this.redraw();
       });
-    });
+    }
 
     const contentEl = this.containerEl.children[1];
     contentEl.empty();
@@ -267,6 +269,50 @@ export default class RecentFilesPlugin extends Plugin {
         this.app.workspace.revealLeaf(leaf);
       },
     });
+    // Command to open the first recently opened file
+    this.addCommand({
+      id: 'open-recent-file',
+      name: 'Open Recent File #1',
+      callback: () => {
+        this.openRecentFile(1);
+      },
+    });
+
+    // Command to open the second recently opened file
+    this.addCommand({
+      id: 'open-second-recent-file',
+      name: 'Open Recent File #2',
+      callback: () => {
+        this.openRecentFile(2);
+      },
+    });
+
+    // Command to open the third recently opened file
+    this.addCommand({
+      id: 'open-third-recent-file',
+      name: 'Open Recent File #3',
+      callback: () => {
+        this.openRecentFile(3);
+      },
+    });
+
+    // Command to open the fourth recently opened file
+    this.addCommand({
+      id: 'open-fourth-recent-file',
+      name: 'Open Recent File #4',
+      callback: () => {
+        this.openRecentFile(4);
+      },
+    });
+
+    // Command to open the fifth recently opened file
+    this.addCommand({
+      id: 'open-fifth-recent-file',
+      name: 'Open Recent File #5',
+      callback: () => {
+        this.openRecentFile(5);
+      },
+    });
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (this.app.workspace as any).registerHoverLinkSource(
@@ -280,15 +326,29 @@ export default class RecentFilesPlugin extends Plugin {
     if (this.app.workspace.layoutReady) {
       this.initView();
     } else {
-      this.registerEvent(
-        this.app.workspace.on('layout-ready', this.initView, this),
-      );
+      // this.registerEvent(
+      //   this.app.workspace.on('layout-ready', this.initView, this),
+      // );
+      this.app.workspace.onLayoutReady(this.initView);
     }
 
     this.registerEvent(this.app.vault.on('rename', this.handleRename));
     this.registerEvent(this.app.vault.on('delete', this.handleDelete));
 
     this.addSettingTab(new RecentFilesSettingTab(this.app, this));
+  }
+
+  public openRecentFile(index: number): void {
+    // Check if the requested file exists in the list
+    if (index < this.data.recentFiles.length) {
+      const filePath = this.data.recentFiles[index];
+      // Assuming filePath is a valid path to the file
+      // Use the app's workspace to open the file in the current leaf (tab)
+      this.app.workspace.openLinkText(filePath.path, '/', false);
+    } else {
+      // Handle the case where the file doesn't exist (e.g., the list is shorter than expected)
+      new Notice('The requested file is not available.');
+    }
   }
 
   public onunload(): void {

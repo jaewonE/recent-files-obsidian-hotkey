@@ -4,12 +4,12 @@
   "description": "List files by most recently opened",
   "main": "main.js",
   "scripts": {
-    "dev": "rollup --config rollup.config.js -w",
+    "dev": "rollup --config rollup.config.mjs -w",
     "build": "rollup --config rollup.config.mjs",
     "eslint": "eslint . --ext .ts,.tsx --fix"
   },
   "keywords": [],
-  "author": "Tony Grosinger",
+  "author": "Tony Grosinger and JaewonE",
   "license": "GPL-3.0",
   "devDependencies": {
     "@rollup/plugin-commonjs": "25.0.7",
