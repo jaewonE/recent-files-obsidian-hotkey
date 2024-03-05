@@ -9,7 +9,7 @@
     "eslint": "eslint . --ext .ts,.tsx --fix"
   },
   "keywords": [],
-  "author": "Tony Grosinger and JaewonE",
+  "author": "Tony Grosinger",
   "license": "GPL-3.0",
   "devDependencies": {
     "@rollup/plugin-commonjs": "25.0.7",
