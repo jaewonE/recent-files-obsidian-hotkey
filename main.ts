@@ -197,6 +197,17 @@ class RecentFilesListView extends ItemView {
       return;
     }
 
+    for (let i = 0; i < this.data.recentFiles.length; i++) {
+      if (this.data.recentFiles[i].path === openedFile.path) {
+        // navFileTitle.addClass('is-active');
+        this.redraw();
+        return;
+      }
+      if (i >= 5) {
+        break;
+      }
+    }
+
     await this.updateData(openedFile);
     this.redraw();
   };
