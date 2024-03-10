@@ -4,7 +4,7 @@
 
 You can use hotkeys to access recently opened files.
 
-Command + 1,2,3,4,5 to access the last five files you opened.
+You can register hotkeys for the five most recently opened files to quickly open them.
 
 The order in which the five most recently opened files are stored is not changed.
 
