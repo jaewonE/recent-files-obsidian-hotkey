@@ -203,7 +203,7 @@ class RecentFilesListView extends ItemView {
         this.redraw();
         return;
       }
-      if (i > 5) {
+      if (i >= 4) {
         break;
       }
     }
