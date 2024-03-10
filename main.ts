@@ -113,7 +113,7 @@ class RecentFilesListView extends ItemView {
         cls: 'tree-item-inner nav-file-title-content recent-files-title-content',
       });
 
-      navFileTitleContent.setText(`${i}ㅤㅤ${currentFile.basename}`);
+      navFileTitleContent.setText(`${i + 1}ㅤㅤ${currentFile.basename}`);
 
       if (openFile && currentFile.path === openFile.path) {
         navFileTitle.addClass('is-active');
@@ -203,7 +203,7 @@ class RecentFilesListView extends ItemView {
         this.redraw();
         return;
       }
-      if (i >= 5) {
+      if (i > 5) {
         break;
       }
     }
@@ -285,7 +285,7 @@ export default class RecentFilesPlugin extends Plugin {
       id: 'open-recent-file',
       name: 'Open Recent File #1',
       callback: () => {
-        this.openRecentFile(1);
+        this.openRecentFile(0);
       },
     });
 
@@ -294,7 +294,7 @@ export default class RecentFilesPlugin extends Plugin {
       id: 'open-second-recent-file',
       name: 'Open Recent File #2',
       callback: () => {
-        this.openRecentFile(2);
+        this.openRecentFile(1);
       },
     });
 
@@ -303,7 +303,7 @@ export default class RecentFilesPlugin extends Plugin {
       id: 'open-third-recent-file',
       name: 'Open Recent File #3',
       callback: () => {
-        this.openRecentFile(3);
+        this.openRecentFile(2);
       },
     });
 
@@ -312,7 +312,7 @@ export default class RecentFilesPlugin extends Plugin {
       id: 'open-fourth-recent-file',
       name: 'Open Recent File #4',
       callback: () => {
-        this.openRecentFile(4);
+        this.openRecentFile(3);
       },
     });
 
@@ -321,7 +321,7 @@ export default class RecentFilesPlugin extends Plugin {
       id: 'open-fifth-recent-file',
       name: 'Open Recent File #5',
       callback: () => {
-        this.openRecentFile(5);
+        this.openRecentFile(4);
       },
     });
 
